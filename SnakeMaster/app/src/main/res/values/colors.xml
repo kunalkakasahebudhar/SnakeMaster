@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Deep Dark Theme Colors -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+    <!-- Neon Green for Snake -->
+    <color name="primary">#00FF41</color> 
+    <color name="primary_light">#39FF14</color>
+    <color name="primary_dark">#008F11</color>
+    
+    <!-- Neon Pink/Red for Food -->
+    <color name="secondary">#FF0055</color>
+    <color name="secondary_glow">#33FF0055</color>
+
+    <!-- Deep Navy Background -->
+    <color name="background">#050813</color> 
+    <color name="surface">#0A1128</color>
+    <color name="error">#CF6679</color>
+    
+    <!-- Translucent overlays -->
+    <color name="overlay_bg">#DD050813</color>
 </resources>
