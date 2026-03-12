@@ -40,7 +40,7 @@ public class Snake {
         }
     }
 
-    public void move() {
+    public void move(int gridWidth, int gridHeight) {
         Point head = body.get(0);
         Point newHead = new Point(head.x, head.y);
 
@@ -50,6 +50,13 @@ public class Snake {
             case LEFT: newHead.x--; break;
             case RIGHT: newHead.x++; break;
         }
+
+        // --- Wrap Around Logic (Transparent Walls) ---
+        if (newHead.x < 0) newHead.x = gridWidth - 1;
+        else if (newHead.x >= gridWidth) newHead.x = 0;
+        
+        if (newHead.y < 0) newHead.y = gridHeight - 1;
+        else if (newHead.y >= gridHeight) newHead.y = 0;
 
         body.add(0, newHead);
         if (!grow) {
@@ -63,15 +70,10 @@ public class Snake {
         grow = true;
     }
 
-    public boolean checkCollision(int gridWidth, int gridHeight) {
+    public boolean checkCollision() {
         Point head = body.get(0);
 
-        // Wall collision
-        if (head.x < 0 || head.x >= gridWidth || head.y < 0 || head.y >= gridHeight) {
-            return true;
-        }
-
-        // Self collision
+        // Self collision ONLY (Walls are now transparent)
         for (int i = 1; i < body.size(); i++) {
             if (head.equals(body.get(i))) {
                 return true;

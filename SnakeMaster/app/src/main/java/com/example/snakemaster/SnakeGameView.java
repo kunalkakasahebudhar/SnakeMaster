@@ -116,7 +116,8 @@ public class SnakeGameView extends SurfaceView implements SurfaceHolder.Callback
     }
 
     private void update() {
-        snake.move();
+        // Pass grid dimensions for wrap-around
+        snake.move(gridWidth, gridHeight);
 
         // Check food collision
         Point head = snake.getBody().get(0);
@@ -135,8 +136,8 @@ public class SnakeGameView extends SurfaceView implements SurfaceHolder.Callback
             }
         }
 
-        // Check game over
-        if (snake.checkCollision(gridWidth, gridHeight)) {
+        // Check game over (self-collision only now)
+        if (snake.checkCollision()) {
             isRunning = false;
             if (listener != null) {
                 post(() -> listener.onGameOver(score));
@@ -242,8 +243,8 @@ public class SnakeGameView extends SurfaceView implements SurfaceHolder.Callback
     }
 
     private class SwipeGestureListener extends GestureDetector.SimpleOnGestureListener {
-        private static final int SWIPE_THRESHOLD = 100;
-        private static final int SWIPE_VELOCITY_THRESHOLD = 100;
+        private static final int SWIPE_THRESHOLD = 50; // Increased sensitivity
+        private static final int SWIPE_VELOCITY_THRESHOLD = 50; 
 
         @Override
         public boolean onDown(MotionEvent e) {
